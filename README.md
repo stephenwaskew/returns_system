@@ -30,3 +30,15 @@ Absolutely feel free to make the app better, although it is not neccessary to do
 1. Start backend by `npm install` and `npm start`
 2. Start frontend by go to `client` then `npm install` and `npm start`
 3. Go to your browser and type `localhost:3000`, now you can test your work under this domain
+
+
+## Part Two
+
+
+Design a database for a product return application. The application will contain many different stores, each store will have different return policy and product, but all of them require the customer to fill out a return form, which may be slightly different in every store. Your database will need to keep track of all these data, and expected to sufficiently perform the following operations:
+- Notify the store about their approved return order so they can refund their customer
+- Notify the customer about the status of their return order
+- Display the information of a return order for approval process
+You can use any type of database, such as SQL and NoSQL. Something good to consider when you design your database would be future scaling and additional operations by new features. Please provide an explanation for each of your decisions.
+
+Note: You do not need to write any code, simply lay down the structure of your database. Write down all your assumptions. If you have any questions, you can make an assumption and write it down.
