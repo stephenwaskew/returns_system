@@ -45,4 +45,3 @@ Note: You do not need to write any code, simply lay down the structure of your d
 
 
 ![GitHub Logo](/images/data.png)
-Format: ![Alt Text](url)
