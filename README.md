@@ -42,3 +42,7 @@ Design a database for a product return application. The application will contain
 You can use any type of database, such as SQL and NoSQL. Something good to consider when you design your database would be future scaling and additional operations by new features. Please provide an explanation for each of your decisions.
 
 Note: You do not need to write any code, simply lay down the structure of your database. Write down all your assumptions. If you have any questions, you can make an assumption and write it down.
+
+
+![GitHub Logo](/images/data.png)
+Format: ![Alt Text](url)
