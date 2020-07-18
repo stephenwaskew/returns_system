@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { useTable } from "react-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { Alert } from "@material-ui/lab";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import { Collapse } from "@material-ui/core";
 
 const Styles = styled.div`
   padding: 1rem;
@@ -83,20 +86,22 @@ function Table({ columns, data }) {
   );
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-    border: 0,
-    borderRadius: 3,
-    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-    color: "white",
-    height: 48,
-    padding: "0 30px",
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+    marginBottom: "10px",
   },
-});
+}));
 
 function ReturnsTable(returnable) {
   const [message, setMessage] = useState(null);
+  const [open, setOpen] = React.useState(true);
+  const [thirtyDaysOpen, setThirtyDaysOpen] = React.useState(true);
+
+  const classes = useStyles();
 
   const Notification = ({ message }) => {
     if (message === null) {
@@ -104,7 +109,57 @@ function ReturnsTable(returnable) {
     }
     return (
       <div>
-        <Alert severity="error">{message}</Alert>
+        {message.prods.map((product) =>
+          product.onsale == true ? (
+            <div className={classes.root}>
+              <Collapse in={open}>
+                {" "}
+                <Alert
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                  key={product.id}
+                  severity="error"
+                >
+                  Product {product.id} was on sale so it can't be returned
+                </Alert>
+              </Collapse>
+            </div>
+          ) : (
+            <div className={classes.root}>
+              <Collapse in={thirtyDaysOpen}>
+                <Alert
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        setThirtyDaysOpen(false);
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                  key={product.id}
+                  severity="error"
+                >
+                  Product id: {product.id} was purchased outside the 30 days
+                  return period.
+                </Alert>
+              </Collapse>
+            </div>
+          )
+        )}
       </div>
     );
   };
@@ -127,22 +182,17 @@ function ReturnsTable(returnable) {
     ],
     []
   );
+  const curStatus = returnable.returnable.status;
   const curData = returnable.returnable.data;
-
+  console.log(returnable.returnable);
+  console.log("curdata", curData, curStatus);
   return (
     <div>
       <h1> Products Eligible for Return </h1>
 
-      {curData === "Transaction is outside 30 day return period." ? (
-        <Notification message={curData} />
-      ) : null}
-      {curData === "Product was on sale so it cannot be returned." ? (
-        <Notification message={curData} />
-      ) : null}
+      {curStatus === 202 ? <Notification message={curData} /> : null}
 
-      {curData !== undefined &&
-      curData !== "Transaction is outside 30 day return period." &&
-      curData !== "Product was on sale so it cannot be returned." ? (
+      {curData !== undefined && curStatus !== 202 ? (
         <Styles>
           <Table columns={columns} data={curData} />
         </Styles>

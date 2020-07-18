@@ -8,9 +8,10 @@ app.use(express.json());
 
 // const app = express();
 const db_json = require("./database/db.json");
-
+// use cors to get rid of access control origin error
 app.use(cors());
 
+// function checks if transaciton occured in the last 30 days
 function lessThanThirtyDays(dateOne, dateTwo) {
   return (
     30 >
@@ -18,10 +19,12 @@ function lessThanThirtyDays(dateOne, dateTwo) {
   );
 }
 
+// function checks if the products purchased were on sale
 function isNotOnSale(currentTransactions) {
   return currentTransactions.prods.filter((product) => product.onsale !== true);
 }
 
+// function checks if items were returnable
 function isReturnableProduct(notOnSaleProducts) {
   return notOnSaleProducts
     .map((product) => db.findProduct(product.id))
@@ -41,13 +44,13 @@ app.get("/", (request, response) => {
   if (withinThirtyDays) {
     const notOnSaleProducts = isNotOnSale(currentTransactions);
     if (notOnSaleProducts.length === 0) {
-      return response.send("Product was on sale so it cannot be returned.");
+      return response.status(202).send(currentTransactions);
     }
     const returnableProducts = isReturnableProduct(notOnSaleProducts);
-    return response.send(returnableProducts);
+    return response.status(200).send(returnableProducts);
   }
 
-  response.send("Transaction is outside 30 day return period.");
+  response.status(202).send(currentTransactions);
 });
 
 const port = process.env.PORT || 5000;
