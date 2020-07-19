@@ -48,11 +48,10 @@ function App() {
     <div className="App">
       <StateMachineProvider>
         <DevTool />
-        <Router>
+        <HashRouter>
         <Route exact path="/" component={TransactionForm} />
         <Route path="/returns" component={ReturnsTable} />
-
-        </Router>
+        </HashRouter>
       </StateMachineProvider>
     </div>
   );

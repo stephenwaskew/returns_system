@@ -122,7 +122,23 @@ const ReturnsTable = props => {
     return "2020-06-20T12:27:40 +04:00";
   }
  
-  
+ 
+  const fetchData = async () => {
+    const currentDate = getCurrentDate();
+    const result = await transactionService.getReturns(
+      state.data.transactionID,
+      currentDate
+    ); 
+
+    setData(result);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+  /*
   useEffect(async () => {
     const currentDate = getCurrentDate();
     const fetchData = async () => {
@@ -136,7 +152,7 @@ const ReturnsTable = props => {
 
     fetchData();
   }, []);
- 
+ */
   const getApi = async () => {
     console.log('the resultaaaa')
 
