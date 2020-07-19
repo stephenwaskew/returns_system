@@ -81,47 +81,92 @@
     {
       "id": 0,
       "returnable": true,
-      "company": "AAA"
+      "company": [
+        {
+          "companyName": "AAA",
+          "allowsReturns": "Yes"
+        }
+      ]
     },
     {
       "id": 1,
       "returnable": true,
-      "company": "BBB"
+      "company": [
+        {
+          "companyName": "BBB",
+          "allowsReturns": "No"
+        }
+      ]
     },
     {
       "id": 2,
       "returnable": true,
-      "company": "AAA"
+      "company": [
+        {
+          "companyName": "AAA",
+          "allowsReturns": "Yes"
+        }
+      ]
     },
     {
       "id": 3,
       "returnable": true,
-      "company": "AAA"
+      "company": [
+        {
+          "companyName": "AAA",
+          "allowsReturns": "Yes"
+        }
+      ]
     },
     {
       "id": 4,
       "returnable": true,
-      "company": "BBB"
+      "company": [
+        {
+          "companyName": "AAA",
+          "allowsReturns": "Yes"
+        }
+      ]
     },
     {
       "id": 5,
       "returnable": false,
-      "company": "BBB"
+      "company": [
+        {
+          "companyName": "BBB",
+          "allowsReturns": "No"
+        }
+      ]
     },
     {
       "id": 6,
       "returnable": false,
-      "company": "CCC"
+      "company": [
+        {
+          "companyName": "BBB",
+          "allowsReturns": "No"
+        }
+      ]
     },
     {
       "id": 7,
       "returnable": true,
-      "company": "AAA"
+      "company": [
+        {
+          "companyName": "BBB",
+          "allowsReturns": "No"
+        }
+      ]
     },
     {
       "id": 8,
       "returnable": false,
-      "company": "CCC"
+      "company": [
+        {
+          "companyName": "BBB",
+          "allowsReturns": "No"
+        }
+      ]
     }
   ]
 }

@@ -24,6 +24,16 @@ body {
     margin: 0 auto;
   }
   
+  ul {
+    color: white;
+    list-style-type: upper-roman;
+
+  }
+
+  li span {
+    position: relative;
+    left: -10px;
+  }
   input {
     display: block;
     box-sizing: border-box;
