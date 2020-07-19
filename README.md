@@ -1,3 +1,21 @@
+# Part One
+- I added nodemon for auto reload of backend and cors to allow for cross origin api calls between the front and backend
+- To deal with different company policies i adjusted the db.json like so in the products array:
+
+   {
+      "id": 0,
+      "returnable": true,
+      "company": [
+        {
+          "companyName": "AAA",
+          "allowsReturns": "Yes"
+        }
+      ]
+    },
+- now each company can state if they allowReturns.
+
+
+
 ## Overview
 
 Currently this app allow user to enter a transaction id, but will not do anything.

@@ -108,8 +108,9 @@ function ReturnsTable(returnable) {
   const [open, setOpen] = React.useState(true);
   const [thirtyDaysOpen, setThirtyDaysOpen] = React.useState(true);
   const [localData, setLocalData] = React.useState(returnable)
+  
 
-
+  console.log('ddddddd', localData)
   const classes = useStyles();
 
   const Notification = ({ message }) => {
