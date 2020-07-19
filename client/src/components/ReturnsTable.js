@@ -4,8 +4,14 @@ import { useTable } from "react-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { Alert } from "@material-ui/lab";
 import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
 import { Collapse } from "@material-ui/core";
+import { useStateMachine } from "little-state-machine";
+import updateAction from "./updateAction";
+
+import { StateMachineProvider, createStore } from "little-state-machine";
+import transactionService from "../services/transactionServices";
+
+
 
 const Styles = styled.div`
   padding: 1rem;
@@ -102,13 +108,59 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ReturnsTable(returnable) {
 
+const ReturnsTable = props => {
+  const { state } = useStateMachine(updateAction);
+  const [count, setCount] = useState(0);
   const [open, setOpen] = React.useState(true);
   const [thirtyDaysOpen, setThirtyDaysOpen] = React.useState(true);
-  const [localData, setLocalData] = React.useState(returnable)
+  const [localData, setLocalData] = React.useState(null)
+ 
+  const [data, setData] = useState([] );
+  // Use this function to get Current Date
+  function getCurrentDate() {
+    return "2020-06-20T12:27:40 +04:00";
+  }
+ 
   
+  useEffect(async () => {
+    const currentDate = getCurrentDate();
+    const fetchData = async () => {
+      const result = await transactionService.getReturns(
+        state.data.transactionID,
+        currentDate
+      ); 
 
+      setData(result);
+    };
+
+    fetchData();
+  }, []);
+ 
+  const getApi = async () => {
+    console.log('the resultaaaa')
+
+    const currentDate = getCurrentDate();
+    console.log('the resultaaaa', currentDate)
+    const result = await transactionService.getReturns(
+      state.data.transactionID,
+      currentDate
+    ); 
+    // console.log('the resultaaaa', result)
+    // setData(result.data);
+  };
+ 
+  const currentDate = getCurrentDate();
+
+  // console.log('the state222: ', state, props, data.prods)
+
+  // console.log('returns: ', returnable, localData)
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+    //showTable(localData.returnable)
+  });
+
+ 
   const classes = useStyles();
 
   const Notification = ({ message }) => {
@@ -117,6 +169,7 @@ function ReturnsTable(returnable) {
     }
     return (
       <div>
+        
         {message.prods.map((product) =>
           product.onsale === true ? (
             <div key={product.id} className={classes.root}>
@@ -132,7 +185,6 @@ function ReturnsTable(returnable) {
                         setOpen(false);
                       }}
                     >
-                      <CloseIcon fontSize="inherit" />
                     </IconButton>
                   }
                   key={product.id}
@@ -155,7 +207,6 @@ function ReturnsTable(returnable) {
                         setThirtyDaysOpen(false);
                       }}
                     >
-                      <CloseIcon fontSize="inherit" />
                     </IconButton>
                   }
                   key={product.id}
@@ -168,7 +219,9 @@ function ReturnsTable(returnable) {
             </div>
           )
         )}
+
       </div>
+      
     );
   };
 
@@ -198,14 +251,15 @@ function ReturnsTable(returnable) {
 
   // check if product is eligible for return based on its status and then display in the table
   const showTable = ( returnable ) => {
-    if (returnable !== null) {
+    console.log('hereeeeaaa', returnable)
+    if (returnable !== null && returnable !== undefined) {
       if (returnable.status == 200) {
         return (
-          <div>
+     
         <Styles>
           <Table columns={columns} data={returnable.data}/>
         </Styles>
-        </div>
+
         )     
       }
 
@@ -227,9 +281,16 @@ function ReturnsTable(returnable) {
       <li><span>Product is returnable</span></li>
       <li><span>Product is not on sale</span></li>
     </ul>
-    {showTable(localData.returnable)}
+
+    {console.log('123456', data)}
+    {(data.length !== 0 ? showTable(data): null)}
 </div>
   );
 }
 
 export default ReturnsTable;
+
+
+// {showTable(localData.returnable)}
+
+//     {getApi()}

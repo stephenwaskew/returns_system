@@ -1,17 +1,25 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import "./styles.css";
+import updateAction from "./updateAction";
+import { useStateMachine } from "little-state-machine";
 
 import { BrowserRouter as Router, useHistory } from 'react-router-dom'
 
-function TransactionForm ({transactions}) {
+
+  const  TransactionForm = props => {
+
   const { register, handleSubmit, watch, errors } = useForm()
-  const history = useHistory()
+  const { action, state } = useStateMachine(updateAction);
+  console.log('the state: ', state)
+  // const history = useHistory()
   const onSubmit = data => {
-    transactions({
-        transactionID: data.transactionID
-    })
-   history.push('/returns')
+    console.log('some data', data)
+    action(data);
+    //transactions({
+    //    transactionID: props.data.transactionID
+    //})
+   props.history.push('/returns')
   } 
   // limit user input to only numbers between 0 and 5. It might be nice to do a lookup of length here to determine actual numbers dynamically.
   return (

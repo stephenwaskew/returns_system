@@ -32,9 +32,11 @@ function isReturnableProduct(notOnSaleProducts) {
 }
 
 app.get("/", (request, response) => {
+  console.log('tequest3333', request.query)
   const id = Number(request.query.frontendID);
   const timeStampOne = request.query.currentDate;
   const currentTransactions = db.findTransaction(id);
+  console.log('the server here: ', timeStampOne, currentTransactions)
   const timeStampTwo = currentTransactions.transaction_date;
 
   const withinThirtyDays = lessThanThirtyDays(

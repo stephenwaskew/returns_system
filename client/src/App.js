@@ -3,10 +3,11 @@ import "./App.css";
 import transactionService from "./services/transactionServices";
 import TransactionForm from "./components/TransactionForm";
 import ReturnsTable from "./components/ReturnsTable";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, HashRouter } from "react-router-dom";
 import { StateMachineProvider, createStore } from "little-state-machine";
 import { makeStyles } from "@material-ui/core/styles";
 import { Alert } from "@material-ui/lab";
+import { DevTool } from 'little-state-machine-devtools';
 
 // Use this function to get Current Date
 function getCurrentDate() {
@@ -46,17 +47,11 @@ function App() {
   return (
     <div className="App">
       <StateMachineProvider>
+        <DevTool />
         <Router>
-          <Route
-            exact
-            path="/"
-            component={() => <TransactionForm transactions={getReturnable} />}
-          />
-          <Route
-            exact
-            path="/returns"
-            component={() => <ReturnsTable returnable={returnable} />}
-          />
+        <Route exact path="/" component={TransactionForm} />
+        <Route path="/returns" component={ReturnsTable} />
+
         </Router>
       </StateMachineProvider>
     </div>

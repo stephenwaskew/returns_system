@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "fontsource-roboto": "^2.1.4",
     "little-state-machine": "^3.0.3",
+    "little-state-machine-devtools": "^1.0.0",
     "namor": "^2.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
