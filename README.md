@@ -12,7 +12,7 @@
         }
       ]
     },
-- now each company can state if they allowReturns.
+- now each company can state if they allowReturns and the row is highlighted (green if allowed and red if not)
 
 
 
@@ -61,5 +61,6 @@ You can use any type of database, such as SQL and NoSQL. Something good to consi
 
 Note: You do not need to write any code, simply lay down the structure of your database. Write down all your assumptions. If you have any questions, you can make an assumption and write it down.
 
-
-![GitHub Logo](/images/data.png)
+# Part 2
+- for part two I placed my data model in the images directory. I followed a NoSQL approach for my design.
+![Data Model](/images/data.png)

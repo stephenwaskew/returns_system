@@ -69,7 +69,6 @@ function Table({ columns, data }) {
         <tbody {...getTableBodyProps()}>
           {rows.map((row, i) => {
             prepareRow(row);
-            console.log('the cell: ', row.original.company[0].allowsReturns)
             return (
               (row.original.company[0].allowsReturns === "Yes" ?    <tr style={{backgroundColor: "green"}} {...row.getRowProps()}>
                 {row.cells.map((cell) => {
@@ -110,14 +109,12 @@ function ReturnsTable(returnable) {
   const [localData, setLocalData] = React.useState(returnable)
   
 
-  console.log('ddddddd', localData)
   const classes = useStyles();
 
   const Notification = ({ message }) => {
     if (message === null) {
       return null;
     }
-    console.log('the message: ', message)
     return (
       <div>
         {message.prods.map((product) =>
@@ -201,7 +198,6 @@ function ReturnsTable(returnable) {
 
   // check if product is eligible for return based on its status and then display in the table
   const showTable = ( returnable ) => {
-    console.log(returnable)
     if (returnable !== null) {
       if (returnable.status == 200) {
         return (
