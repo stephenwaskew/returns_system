@@ -7,4 +7,3 @@ export default function updateAction(state, payload) {
       }
     };
   }
-  

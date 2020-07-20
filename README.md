@@ -1,7 +1,15 @@
 # Part One
-- I added nodemon for auto reload of backend and cors to allow for cross origin api calls between the front and backend
-- To deal with different company policies i adjusted the db.json like so in the products array:
-
+## NPM Packages Added
+- nodemon for auto reload of backend and cors to allow for cross origin api calls between the front and backend
+- little-state-machine for state control. 
+- material-ui-icons for use of different icons
+- material ui and styled components for styling
+- react-hooks-forms for form
+- axios for api calls with backend
+- react-router-dom for routing
+- moved getCurrentDate function to returns table
+- add react-table for displaying returns as table
+- To deal with different company policies I adjusted the db.json like so in the products array:
    {
       "id": 0,
       "returnable": true,
@@ -12,7 +20,7 @@
         }
       ]
     },
-- now each company can state if they allowReturns and the row is highlighted (green if allowed and red if not)
+- now each company can state if they allowReturns (or whatever policy) and the row is highlighted (green if allowed and red if not)
 
 
 

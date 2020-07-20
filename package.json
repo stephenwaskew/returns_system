@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "server": "json-server -p 5000 --watch database/db.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,10 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "react-icons": "^3.10.0"
   },
   "devDependencies": {
-    "json-server": "^0.16.1",
     "nodemon": "^2.0.4"
   }
 }

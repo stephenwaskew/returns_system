@@ -7,11 +7,8 @@ import IconButton from "@material-ui/core/IconButton";
 import { Collapse } from "@material-ui/core";
 import { useStateMachine } from "little-state-machine";
 import updateAction from "./updateAction";
-
-import { StateMachineProvider, createStore } from "little-state-machine";
 import transactionService from "../services/transactionServices";
-
-
+import CloseIcon from '@material-ui/icons/Close';
 
 const Styles = styled.div`
   padding: 1rem;
@@ -47,7 +44,7 @@ const Styles = styled.div`
 `;
 
 function Table({ columns, data }) {
-  // Use the state and functions returned from useTable to build your UI
+  // state and functions to get the table ready
   const {
     getTableProps,
     getTableBodyProps,
@@ -59,7 +56,7 @@ function Table({ columns, data }) {
     data,
   });
 
-  // Render the UI for the table.
+  // create the table itself along with logic for multiple company policies
   return (
     <div>
       <table {...getTableProps()}>
@@ -111,10 +108,8 @@ const useStyles = makeStyles((theme) => ({
 
 const ReturnsTable = props => {
   const { state } = useStateMachine(updateAction);
-  const [count, setCount] = useState(0);
   const [open, setOpen] = React.useState(true);
   const [thirtyDaysOpen, setThirtyDaysOpen] = React.useState(true);
-  const [localData, setLocalData] = React.useState(null)
  
   const [data, setData] = useState([] );
   // Use this function to get Current Date
@@ -122,61 +117,20 @@ const ReturnsTable = props => {
     return "2020-06-20T12:27:40 +04:00";
   }
  
- 
   const fetchData = async () => {
     const currentDate = getCurrentDate();
     const result = await transactionService.getReturns(
       state.data.transactionID,
       currentDate
     ); 
-
     setData(result);
   };
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-  /*
-  useEffect(async () => {
-    const currentDate = getCurrentDate();
-    const fetchData = async () => {
-      const result = await transactionService.getReturns(
-        state.data.transactionID,
-        currentDate
-      ); 
-
-      setData(result);
-    };
-
-    fetchData();
-  }, []);
- */
-  const getApi = async () => {
-    console.log('the resultaaaa')
-
-    const currentDate = getCurrentDate();
-    console.log('the resultaaaa', currentDate)
-    const result = await transactionService.getReturns(
-      state.data.transactionID,
-      currentDate
-    ); 
-    // console.log('the resultaaaa', result)
-    // setData(result.data);
-  };
- 
-  const currentDate = getCurrentDate();
-
-  // console.log('the state222: ', state, props, data.prods)
-
-  // console.log('returns: ', returnable, localData)
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-    //showTable(localData.returnable)
-  });
-
- 
   const classes = useStyles();
 
   const Notification = ({ message }) => {
@@ -201,6 +155,7 @@ const ReturnsTable = props => {
                         setOpen(false);
                       }}
                     >
+                 <CloseIcon />
                     </IconButton>
                   }
                   key={product.id}
@@ -223,6 +178,7 @@ const ReturnsTable = props => {
                         setThirtyDaysOpen(false);
                       }}
                     >
+                <CloseIcon />
                     </IconButton>
                   }
                   key={product.id}
@@ -267,19 +223,16 @@ const ReturnsTable = props => {
 
   // check if product is eligible for return based on its status and then display in the table
   const showTable = ( returnable ) => {
-    console.log('hereeeeaaa', returnable)
     if (returnable !== null && returnable !== undefined) {
-      if (returnable.status == 200) {
+      if (returnable.status === 200) {
         return (
-     
         <Styles>
           <Table columns={columns} data={returnable.data}/>
         </Styles>
-
         )     
       }
 
-      if (returnable.status == 202) {
+      if (returnable.status === 202) {
         return (
           <div>
           <Notification message={returnable.data} />
@@ -297,8 +250,6 @@ const ReturnsTable = props => {
       <li><span>Product is returnable</span></li>
       <li><span>Product is not on sale</span></li>
     </ul>
-
-    {console.log('123456', data)}
     {(data.length !== 0 ? showTable(data): null)}
 </div>
   );
@@ -307,6 +258,3 @@ const ReturnsTable = props => {
 export default ReturnsTable;
 
 
-// {showTable(localData.returnable)}
-
-//     {getApi()}

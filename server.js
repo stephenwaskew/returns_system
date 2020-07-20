@@ -6,12 +6,11 @@ const http = require("http");
 const app = express();
 app.use(express.json());
 
-// const app = express();
 const db_json = require("./database/db.json");
 // use cors to get rid of access control origin error
 app.use(cors());
 
-// function checks if transaciton occured in the last 30 days
+// function checks if transaction occurred in the last 30 days
 function lessThanThirtyDays(dateOne, dateTwo) {
   return (
     30 >
@@ -32,11 +31,9 @@ function isReturnableProduct(notOnSaleProducts) {
 }
 
 app.get("/", (request, response) => {
-  console.log('tequest3333', request.query)
   const id = Number(request.query.frontendID);
   const timeStampOne = request.query.currentDate;
   const currentTransactions = db.findTransaction(id);
-  console.log('the server here: ', timeStampOne, currentTransactions)
   const timeStampTwo = currentTransactions.transaction_date;
 
   const withinThirtyDays = lessThanThirtyDays(
