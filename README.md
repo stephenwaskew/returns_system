@@ -1,13 +1,17 @@
 # Starting
+```
 Go to: /flindeltest/task1/fldlinterviewtest-master 
 Run: npm install
 Run: npm run start
-
+```
+```
 Go to: /flindeltest/task1/fldlinterviewtest-master/client
 Run: npm install
 Run: npm run start
+```
 
-Then go to localhost:3000 and enter an product id.
+Then go to localhost:3000 and enter a product id.
+
 # Part One
 ## NPM Packages Added
 - nodemon for auto reload of backend and cors to allow for cross origin api calls between the front and backend
