@@ -1,11 +1,11 @@
 # Starting
 ```
-Go to: /flindeltest/task1/fldlinterviewtest-master 
+Go to: /flindeltest_STEPHEN_ASKEW/task1/fldlinterviewtest-master 
 Run: npm install
 Run: npm run start
 ```
 ```
-Go to: /flindeltest/task1/fldlinterviewtest-master/client
+Go to: /flindeltest_STEPHEN_ASKEW/task1/fldlinterviewtest-master/client
 Run: npm install
 Run: npm run start
 ```
