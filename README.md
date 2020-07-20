@@ -1,3 +1,13 @@
+# Starting
+Go to: /flindeltest/task1/fldlinterviewtest-master 
+Run: npm install
+Run: npm run start
+
+Go to: /flindeltest/task1/fldlinterviewtest-master/client
+Run: npm install
+Run: npm run start
+
+Then go to localhost:3000 and enter an product id.
 # Part One
 ## NPM Packages Added
 - nodemon for auto reload of backend and cors to allow for cross origin api calls between the front and backend
@@ -10,7 +20,8 @@
 - moved getCurrentDate function to returns table
 - add react-table for displaying returns as table
 - To deal with different company policies I adjusted the db.json like so in the products array:
-   {
+  ``` 
+  {
       "id": 0,
       "returnable": true,
       "company": [
@@ -19,7 +30,8 @@
           "allowsReturns": "Yes"
         }
       ]
-    },
+    } 
+  ```
 - now each company can state if they allowReturns (or whatever policy) and the row is highlighted (green if allowed and red if not)
 
 
